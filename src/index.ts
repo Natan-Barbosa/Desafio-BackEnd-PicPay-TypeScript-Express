@@ -5,6 +5,7 @@ import { logger } from "./config/jet.logger.config";
 import * as dotenv from "dotenv";
 import { enviroment } from "./constants/enviroment";
 import bodyParser from "body-parser";
+import { WalletRoutes } from "./routes/wallet.routes";
 
 dotenv.config();
 const envConfig = process.env.NODE_ENV || enviroment.dev;
@@ -20,6 +21,7 @@ if (envConfig == enviroment.dev) {
 app.get("/", (_req: Request, res: Response) => {
   res.send("Hello World");
 });
+app.use(WalletRoutes);
 
 app.listen(port, () => {
   if (envConfig == enviroment.dev) {
