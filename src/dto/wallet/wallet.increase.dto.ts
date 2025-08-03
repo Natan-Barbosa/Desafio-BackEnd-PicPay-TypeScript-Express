@@ -1,4 +1,4 @@
-import { IsEmail, IsNumber, IsPositive, IsString, Length } from "class-validator";
+import { IsNumber, IsPositive, IsString, Length } from "class-validator";
 
 export class IncreaseBalanceDto {
 
@@ -6,17 +6,12 @@ export class IncreaseBalanceDto {
     @IsString()
     cpfOrCnpj: string;
 
-    @IsString()
-    @IsEmail()
-    email: string;
-
     @IsNumber()
     @IsPositive()
     value: number;
 
-    constructor(cpfOrCpnj: string, email: string, value: number) {
+    constructor(cpfOrCpnj: string, value: number) {
         this.cpfOrCnpj = cpfOrCpnj
-        this.email = email
         this.value = value
     }
 }
