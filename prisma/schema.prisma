@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  runtime = "nodejs"
+  generatedFilseExtension = "ts"
+  importFileExtension = "ts"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Transaction{
+  id String @id @default(uuid())
+  receiver Wallet @relation(fields: [receiverId],references: [id],name: "receivedTransactions")
+  sender Wallet @relation(fields: [senderId],references: [id],name: "sentTransactions")
+  value Decimal
+  timeStamp DateTime @default(now())
+  receiverId String
+  senderId String
+}
+
+enum walletType {
+  User
+  Seller
+}
+
+model Wallet{
+  id String @id @default(uuid())
+  fullName String
+  cpfOrCnpj String @unique
+  email String @unique
+  balance Decimal
+  password String
+  walletType walletType
+  receivedTransactions Transaction[] @relation(name: "receivedTransactions")
+  sentTransactions Transaction[] @relation(name: "sentTransactions")
+}
+
