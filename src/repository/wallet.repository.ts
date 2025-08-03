@@ -1,4 +1,5 @@
 import { WalletCreateDto } from "@/dto/wallet/wallet.create.dto";
+import { IncreaseBalanceDto } from "@/dto/wallet/wallet.increase.dto";
 import { PrismaClient } from "@/generated/prisma/client";
 import { injectable } from "tsyringe";
 
@@ -27,6 +28,17 @@ export class WalletRepository {
       where: {
         OR: [{ email: email }, { cpfOrCnpj: cpfOrCnpj }]
       },
+    })
+  }
+
+  public async update(dto: IncreaseBalanceDto) {
+    return await prisma.wallet.update({
+      where: {
+        cpfOrCnpj: dto.cpfOrCnpj
+      },
+      data: {
+        balance: dto.value
+      }
     })
   }
 }
