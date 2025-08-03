@@ -16,6 +16,9 @@ export class WalletRepository {
         password: dto.password,
         walletType: dto.walletType,
       },
+      select: {
+        password: false
+      }
     });
   }
 
@@ -23,7 +26,7 @@ export class WalletRepository {
     return await prisma.wallet.findFirst({
       where: {
         OR: [{ email: email }, { cpfOrCnpj: cpfOrCnpj }]
-      }
+      },
     })
   }
 }
