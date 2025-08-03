@@ -1,0 +1,14 @@
+import { WalletCreateDto } from "@/dto/wallet/wallet.create.dto";
+import { ValidationMiddleware } from "@/middlewares/validation.middleware";
+import express, { NextFunction, Request, Response } from "express";
+import { Controller as WalletController } from "@/containers/wallet.container";
+
+const router = express.Router();
+
+router.post(
+  "/wallet",
+  (req: Request, res: Response, next: NextFunction) => ValidationMiddleware(WalletCreateDto, req, res, next),
+  (req: Request, res: Response) => WalletController.create(req, res)
+);
+
+export { router as WalletRoutes };
