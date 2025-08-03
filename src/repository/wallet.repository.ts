@@ -18,4 +18,12 @@ export class WalletRepository {
       },
     });
   }
+
+  public async findByEmailOrCpfCnpj(email: string, cpfOrCnpj: string) {
+    return await prisma.wallet.findFirst({
+      where: {
+        OR: [{ email: email }, { cpfOrCnpj: cpfOrCnpj }]
+      }
+    })
+  }
 }
