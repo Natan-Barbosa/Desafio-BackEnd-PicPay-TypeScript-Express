@@ -6,6 +6,7 @@ import * as dotenv from "dotenv";
 import { enviroment } from "./constants/enviroment";
 import bodyParser from "body-parser";
 import { WalletRoutes } from "./routes/wallet.routes";
+import { ErrorMiddleware } from "./middlewares/error.middleware";
 
 dotenv.config();
 const envConfig = process.env.NODE_ENV || enviroment.dev;
@@ -23,6 +24,7 @@ app.get("/", (_req: Request, res: Response) => {
 });
 app.use(WalletRoutes);
 
+app.use(ErrorMiddleware)
 app.listen(port, () => {
   if (envConfig == enviroment.dev) {
     logger.imp(`Server Is Runing In Dev Mode On Port: ${port}`);
