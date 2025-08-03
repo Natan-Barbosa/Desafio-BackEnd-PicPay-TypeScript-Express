@@ -18,7 +18,15 @@ export class WalletRepository {
         walletType: dto.walletType,
       },
       select: {
-        password: false
+        password: false,
+        balance: true,
+        cpfOrCnpj: true,
+        email: true,
+        fullName: true,
+        id: true,
+        receivedTransactions: true,
+        sentTransactions: true,
+        walletType: true
       }
     });
   }
@@ -50,6 +58,14 @@ export class WalletRepository {
       select: {
         password: false,
         _count: false,
+        balance: true,
+        cpfOrCnpj: true,
+        email: true,
+        fullName: true,
+        id: true,
+        receivedTransactions: true,
+        sentTransactions: true,
+        walletType: true
       }
     })
   }
