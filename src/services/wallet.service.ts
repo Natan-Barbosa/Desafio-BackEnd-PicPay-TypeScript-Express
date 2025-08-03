@@ -26,6 +26,7 @@ export class WalletService {
     if (!wallet) {
       throw new HttpException(ReasonPhrases.BAD_REQUEST, StatusCodes.BAD_REQUEST, "Wallet Not Found!")
     }
+    dto.value = Number(dto.value) + Number(wallet.balance)
     return await this.walletRepository.update(dto)
   }
 }
