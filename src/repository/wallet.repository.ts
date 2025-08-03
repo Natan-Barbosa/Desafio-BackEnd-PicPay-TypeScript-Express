@@ -31,6 +31,14 @@ export class WalletRepository {
     })
   }
 
+  public async findByCpfCnpj(cpfOrCnpj: string) {
+    return await prisma.wallet.findUnique({
+      where: {
+        cpfOrCnpj: cpfOrCnpj
+      },
+    })
+  }
+
   public async update(dto: IncreaseBalanceDto) {
     return await prisma.wallet.update({
       where: {
@@ -38,6 +46,10 @@ export class WalletRepository {
       },
       data: {
         balance: dto.value
+      },
+      select: {
+        password: false,
+        _count: false,
       }
     })
   }
