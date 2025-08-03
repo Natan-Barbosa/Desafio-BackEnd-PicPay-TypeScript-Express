@@ -16,7 +16,7 @@ model Transaction{
   id String @id @default(uuid())
   receiver Wallet @relation(fields: [receiverId],references: [id],name: "receivedTransactions")
   sender Wallet @relation(fields: [senderId],references: [id],name: "sentTransactions")
-  value Decimal
+  value Decimal @db.Decimal(10,2)
   timeStamp DateTime @default(now())
   receiverId String
   senderId String
@@ -32,7 +32,7 @@ model Wallet{
   fullName String
   cpfOrCnpj String @unique
   email String @unique
-  balance Decimal
+  balance Decimal @db.Decimal(10,2)
   password String
   walletType walletType
   receivedTransactions Transaction[] @relation(name: "receivedTransactions")
