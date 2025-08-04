@@ -7,6 +7,7 @@ import { enviroment } from "./constants/enviroment";
 import bodyParser from "body-parser";
 import { WalletRoutes } from "./routes/wallet.routes";
 import { ErrorMiddleware } from "./middlewares/error.middleware";
+import { TransactionRoutes } from "./routes/transaction.routes";
 
 dotenv.config();
 const envConfig = process.env.NODE_ENV || enviroment.dev;
@@ -23,6 +24,7 @@ app.get("/", (_req: Request, res: Response) => {
   res.send("Hello World");
 });
 app.use(WalletRoutes);
+app.use(TransactionRoutes)
 
 app.use(ErrorMiddleware)
 app.listen(port, () => {
