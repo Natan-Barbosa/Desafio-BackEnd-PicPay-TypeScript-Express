@@ -47,6 +47,14 @@ export class WalletRepository {
     })
   }
 
+  public async findByID(id: string) {
+    return await prisma.wallet.findUnique({
+      where: {
+        id: id
+      },
+    })
+  }
+
   public async update(dto: IncreaseBalanceDto) {
     return await prisma.wallet.update({
       where: {
